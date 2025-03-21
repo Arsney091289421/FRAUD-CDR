@@ -1,0 +1,14 @@
+<svg
+  width="100"
+  height="100"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    fill="#FFF"
+    d="M12 2L4 5V11C4 16.55 7.84 21.74 12 23C16.16 21.74 20 16.55 20 11V5L12 2Z"
+  />
+  <circle cx="12" cy="10" r="2" fill="red" />
+  <rect x="11" y="12" width="2" height="5" fill="red" />
+</svg>
