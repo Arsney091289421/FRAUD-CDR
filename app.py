@@ -16,7 +16,7 @@ expected_columns = [
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/predict")
 def read_root():
     return {"message": "Hello, World!"}
 
