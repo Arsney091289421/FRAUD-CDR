@@ -16,6 +16,9 @@ expected_columns = [
 
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {"message": "Hello, World!"}
 
 class InputData(BaseModel):
     account_length: int = Field(..., alias="Account_Length")
