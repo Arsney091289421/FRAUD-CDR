@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Fraud Detection</h1>
+        <form id="predictionForm">
+            <input type="number" id="account_length" placeholder="Account Length" required>
+            <input type="number" id="vmail_message" placeholder="VMail Message" required>
+            <input type="number" id="day_mins" placeholder="Day Minutes" required>
+            <input type="number" id="day_calls" placeholder="Day Calls" required>
+            <input type="number" id="day_charge" placeholder="Day Charge" required>
+            <input type="number" id="eve_mins" placeholder="Evening Minutes" required>
+            <input type="number" id="eve_calls" placeholder="Evening Calls" required>
+            <input type="number" id="eve_charge" placeholder="Evening Charge" required>
+            <input type="number" id="night_mins" placeholder="Night Minutes" required>
+            <input type="number" id="night_calls" placeholder="Night Calls" required>
+            <input type="number" id="night_charge" placeholder="Night Charge" required>
+            <input type="number" id="intl_mins" placeholder="International Minutes" required>
+            <input type="number" id="intl_calls" placeholder="International Calls" required>
+            <input type="number" id="intl_charge" placeholder="International Charge" required>
+            <input type="number" id="custserv_calls" placeholder="Customer Service Calls" required>
+            <button type="submit">Predict Fraud</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('predictionForm');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const data = {
+                account_length: document.getElementById('account_length').value,
+                vmail_message: document.getElementById('vmail_message').value,
+                day_mins: document.getElementById('day_mins').value,
+                day_calls: document.getElementById('day_calls').value,
+                day_charge: document.getElementById('day_charge').value,
+                eve_mins: document.getElementById('eve_mins').value,
+                eve_calls: document.getElementById('eve_calls').value,
+                eve_charge: document.getElementById('eve_charge').value,
+                night_mins: document.getElementById('night_mins').value,
+                night_calls: document.getElementById('night_calls').value,
+                night_charge: document.getElementById('night_charge').value,
+                intl_mins: document.getElementById('intl_mins').value,
+                intl_calls: document.getElementById('intl_calls').value,
+                intl_charge: document.getElementById('intl_charge').value,
+                custserv_calls: document.getElementById('custserv_calls').value,
+            };
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            document.getElementById('result').textContent = `Fraud Prediction: ${result.isFraud === 1 ? 'Fraudulent' : 'Not Fraudulent'}`;
+        });
+    </script>
+</body>
+</html>
