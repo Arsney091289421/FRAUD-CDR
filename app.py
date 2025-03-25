@@ -2,6 +2,8 @@ from fastapi import FastAPI
 import joblib
 import pandas as pd
 from pydantic import BaseModel, Field
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 
 rf_model = joblib.load("random_forest_model.pkl")
@@ -16,6 +18,11 @@ expected_columns = [
 
 app = FastAPI()
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/")
+def read_root():
+    return FileResponse("static/index.html")
 
 class InputData(BaseModel):
     account_length: int = Field(..., alias="Account_Length")
